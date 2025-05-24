@@ -42,9 +42,6 @@ $gender = Gender::MAN;
 
 // Get label
 echo $gender->getLabel(); // Output: 男
-
-// Get all options for select
-$options = Gender::getSelectOptions();
 ```
 
 ## Use Cases

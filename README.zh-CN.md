@@ -42,9 +42,6 @@ $gender = Gender::MAN;
 
 // 获取标签
 echo $gender->getLabel(); // 输出：男
-
-// 获取所有选项（用于下拉选择）
-$options = Gender::getSelectOptions();
 ```
 
 ## 使用场景
