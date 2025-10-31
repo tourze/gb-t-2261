@@ -5,6 +5,8 @@
 [![Latest Version](https://img.shields.io/packagist/v/tourze/gb-t-2261.svg?style=flat-square)](https://packagist.org/packages/tourze/gb-t-2261)
 [![Total Downloads](https://img.shields.io/packagist/dt/tourze/gb-t-2261.svg?style=flat-square)](https://packagist.org/packages/tourze/gb-t-2261)
 [![License](https://img.shields.io/github/license/tourze/gb-t-2261.svg?style=flat-square)](https://packagist.org/packages/tourze/gb-t-2261)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/tourze/gb-t-2261.svg?style=flat-square)](https://packagist.org/packages/tourze/gb-t-2261)
+[![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg?style=flat-square)](#)
 
 GB/T 2261 is a Chinese national standard that specifies the classification and codes for personal basic information. This package provides PHP enums for various aspects of this standard.
 

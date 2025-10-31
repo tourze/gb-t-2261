@@ -2,36 +2,18 @@
 
 namespace Tourze\GBT2261\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tourze\GBT2261\HealthSimpleStatus;
+use Tourze\PHPUnitEnum\AbstractEnumTestCase;
 
 /**
  * 健康状况代码（简单版）测试
+ *
+ * @internal
  */
-class HealthSimpleStatusTest extends TestCase
+#[CoversClass(HealthSimpleStatus::class)]
+final class HealthSimpleStatusTest extends AbstractEnumTestCase
 {
-    /**
-     * 测试枚举值
-     */
-    public function testEnum(): void
-    {
-        $this->assertSame(1, HealthSimpleStatus::Health->value);
-        $this->assertSame(2, HealthSimpleStatus::Weak->value);
-        $this->assertSame(3, HealthSimpleStatus::Silk->value);
-        $this->assertSame(6, HealthSimpleStatus::Disabled->value);
-    }
-
-    /**
-     * 测试标签
-     */
-    public function testLabel(): void
-    {
-        $this->assertSame('健康或良好', HealthSimpleStatus::Health->getLabel());
-        $this->assertSame('一般或较弱', HealthSimpleStatus::Weak->getLabel());
-        $this->assertSame('有慢性病', HealthSimpleStatus::Silk->getLabel());
-        $this->assertSame('残疾', HealthSimpleStatus::Disabled->getLabel());
-    }
-
     /**
      * 测试选项列表
      */
@@ -70,9 +52,29 @@ class HealthSimpleStatusTest extends TestCase
     {
         $cases = HealthSimpleStatus::cases();
         $this->assertCount(4, $cases);
-        $this->assertContains(HealthSimpleStatus::Health, $cases);
-        $this->assertContains(HealthSimpleStatus::Weak, $cases);
-        $this->assertContains(HealthSimpleStatus::Silk, $cases);
-        $this->assertContains(HealthSimpleStatus::Disabled, $cases);
+        $this->assertContains(HealthSimpleStatus::HEALTH, $cases);
+        $this->assertContains(HealthSimpleStatus::WEAK, $cases);
+        $this->assertContains(HealthSimpleStatus::SICK, $cases);
+        $this->assertContains(HealthSimpleStatus::DISABLED, $cases);
     }
+
+    /**
+     * 测试toArray方法
+     */
+    public function testToArray(): void
+    {
+        $arrayData = HealthSimpleStatus::HEALTH->toArray();
+        $this->assertArrayHasKey('value', $arrayData);
+        $this->assertArrayHasKey('label', $arrayData);
+        $this->assertSame(1, $arrayData['value']);
+        $this->assertSame('健康或良好', $arrayData['label']);
+
+        $arrayData = HealthSimpleStatus::DISABLED->toArray();
+        $this->assertSame(6, $arrayData['value']);
+        $this->assertSame('残疾', $arrayData['label']);
+    }
+
+    /**
+     * 测试toSelectItem方法
+     */
 }

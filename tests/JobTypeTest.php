@@ -2,54 +2,18 @@
 
 namespace Tourze\GBT2261\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tourze\GBT2261\JobType;
+use Tourze\PHPUnitEnum\AbstractEnumTestCase;
 
 /**
  * 从业状况(个人身份)代码测试
+ *
+ * @internal
  */
-class JobTypeTest extends TestCase
+#[CoversClass(JobType::class)]
+final class JobTypeTest extends AbstractEnumTestCase
 {
-    /**
-     * 测试枚举值
-     */
-    public function testEnum(): void
-    {
-        $this->assertSame(11, JobType::CIVIL_SERVANT->value);
-        $this->assertSame(13, JobType::PROFESSIONAL_TECHNICAL->value);
-        $this->assertSame(17, JobType::STAFF->value);
-        $this->assertSame(21, JobType::ENTERPRISE_MANAGER->value);
-        $this->assertSame(24, JobType::WORKER->value);
-        $this->assertSame(27, JobType::FARMER->value);
-        $this->assertSame(31, JobType::STUDENT->value);
-        $this->assertSame(37, JobType::MILITARY_PERSONNEL->value);
-        $this->assertSame(51, JobType::FREELANCER->value);
-        $this->assertSame(54, JobType::SELF_EMPLOYED->value);
-        $this->assertSame(70, JobType::UNEMPLOYED->value);
-        $this->assertSame(80, JobType::RETIRED->value);
-        $this->assertSame(90, JobType::OTHER->value);
-    }
-
-    /**
-     * 测试标签
-     */
-    public function testLabel(): void
-    {
-        $this->assertSame('国家公务员', JobType::CIVIL_SERVANT->getLabel());
-        $this->assertSame('专业技术人员', JobType::PROFESSIONAL_TECHNICAL->getLabel());
-        $this->assertSame('职员', JobType::STAFF->getLabel());
-        $this->assertSame('企业管理人员', JobType::ENTERPRISE_MANAGER->getLabel());
-        $this->assertSame('工人', JobType::WORKER->getLabel());
-        $this->assertSame('农民', JobType::FARMER->getLabel());
-        $this->assertSame('学生', JobType::STUDENT->getLabel());
-        $this->assertSame('现役军人', JobType::MILITARY_PERSONNEL->getLabel());
-        $this->assertSame('自由职业者', JobType::FREELANCER->getLabel());
-        $this->assertSame('个体经营者', JobType::SELF_EMPLOYED->getLabel());
-        $this->assertSame('无业人员', JobType::UNEMPLOYED->getLabel());
-        $this->assertSame('退（离）休人员', JobType::RETIRED->getLabel());
-        $this->assertSame('其他', JobType::OTHER->getLabel());
-    }
-
     /**
      * 测试选项列表
      */
@@ -95,4 +59,24 @@ class JobTypeTest extends TestCase
         $this->assertContains(JobType::SELF_EMPLOYED, $cases);
         $this->assertContains(JobType::OTHER, $cases);
     }
+
+    /**
+     * 测试toArray方法
+     */
+    public function testToArray(): void
+    {
+        $arrayData = JobType::STUDENT->toArray();
+        $this->assertArrayHasKey('value', $arrayData);
+        $this->assertArrayHasKey('label', $arrayData);
+        $this->assertSame(31, $arrayData['value']);
+        $this->assertSame('学生', $arrayData['label']);
+
+        $arrayData = JobType::WORKER->toArray();
+        $this->assertSame(24, $arrayData['value']);
+        $this->assertSame('工人', $arrayData['label']);
+    }
+
+    /**
+     * 测试toSelectItem方法
+     */
 }

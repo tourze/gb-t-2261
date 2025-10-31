@@ -2,72 +2,18 @@
 
 namespace Tourze\GBT2261\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tourze\GBT2261\HealthFullStatus;
+use Tourze\PHPUnitEnum\AbstractEnumTestCase;
 
 /**
  * 健康状况代码（详细版）测试
+ *
+ * @internal
  */
-class HealthFullStatusTest extends TestCase
+#[CoversClass(HealthFullStatus::class)]
+final class HealthFullStatusTest extends AbstractEnumTestCase
 {
-    /**
-     * 测试枚举值
-     */
-    public function testEnum(): void
-    {
-        $this->assertSame(10, HealthFullStatus::HEALTHY->value);
-        $this->assertSame(20, HealthFullStatus::GENERAL->value);
-        $this->assertSame(30, HealthFullStatus::CHRONIC_DISEASE->value);
-        $this->assertSame(31, HealthFullStatus::CARDIOVASCULAR_DISEASE->value);
-        $this->assertSame(32, HealthFullStatus::CEREBROVASCULAR_DISEASE->value);
-        $this->assertSame(33, HealthFullStatus::CHRONIC_RESPIRATORY_DISEASE->value);
-        $this->assertSame(34, HealthFullStatus::CHRONIC_DIGESTIVE_DISEASE->value);
-        $this->assertSame(35, HealthFullStatus::CHRONIC_NEPHRITIS->value);
-        $this->assertSame(36, HealthFullStatus::TUBERCULOSIS->value);
-        $this->assertSame(37, HealthFullStatus::DIABETES->value);
-        $this->assertSame(38, HealthFullStatus::NEUROLOGICAL_OR_PSYCHIATRIC_DISEASE->value);
-        $this->assertSame(41, HealthFullStatus::CANCER->value);
-        $this->assertSame(49, HealthFullStatus::OTHER_CHRONIC_DISEASE->value);
-        $this->assertSame(60, HealthFullStatus::DISABLED->value);
-        $this->assertSame(61, HealthFullStatus::VISION_DISABILITY->value);
-        $this->assertSame(62, HealthFullStatus::HEARING_DISABILITY->value);
-        $this->assertSame(63, HealthFullStatus::SPEECH_DISABILITY->value);
-        $this->assertSame(64, HealthFullStatus::PHYSICAL_DISABILITY->value);
-        $this->assertSame(65, HealthFullStatus::INTELLECTUAL_DISABILITY->value);
-        $this->assertSame(66, HealthFullStatus::PSYCHIATRIC_DISABILITY->value);
-        $this->assertSame(67, HealthFullStatus::MULTIPLE_DISABILITIES->value);
-        $this->assertSame(69, HealthFullStatus::OTHER_DISABILITY->value);
-    }
-
-    /**
-     * 测试标签
-     */
-    public function testLabel(): void
-    {
-        $this->assertSame('健康或良好', HealthFullStatus::HEALTHY->getLabel());
-        $this->assertSame('一般或较弱', HealthFullStatus::GENERAL->getLabel());
-        $this->assertSame('有慢性病', HealthFullStatus::CHRONIC_DISEASE->getLabel());
-        $this->assertSame('心血管病', HealthFullStatus::CARDIOVASCULAR_DISEASE->getLabel());
-        $this->assertSame('脑血管病', HealthFullStatus::CEREBROVASCULAR_DISEASE->getLabel());
-        $this->assertSame('慢性呼吸系统病', HealthFullStatus::CHRONIC_RESPIRATORY_DISEASE->getLabel());
-        $this->assertSame('慢性消化系统病', HealthFullStatus::CHRONIC_DIGESTIVE_DISEASE->getLabel());
-        $this->assertSame('慢性肾炎', HealthFullStatus::CHRONIC_NEPHRITIS->getLabel());
-        $this->assertSame('结核病', HealthFullStatus::TUBERCULOSIS->getLabel());
-        $this->assertSame('糖尿病', HealthFullStatus::DIABETES->getLabel());
-        $this->assertSame('神经或精神疾病', HealthFullStatus::NEUROLOGICAL_OR_PSYCHIATRIC_DISEASE->getLabel());
-        $this->assertSame('癌症', HealthFullStatus::CANCER->getLabel());
-        $this->assertSame('其他慢性病', HealthFullStatus::OTHER_CHRONIC_DISEASE->getLabel());
-        $this->assertSame('残疾', HealthFullStatus::DISABLED->getLabel());
-        $this->assertSame('视力残疾', HealthFullStatus::VISION_DISABILITY->getLabel());
-        $this->assertSame('听力残疾', HealthFullStatus::HEARING_DISABILITY->getLabel());
-        $this->assertSame('言语残疾', HealthFullStatus::SPEECH_DISABILITY->getLabel());
-        $this->assertSame('肢体残疾', HealthFullStatus::PHYSICAL_DISABILITY->getLabel());
-        $this->assertSame('智力残疾', HealthFullStatus::INTELLECTUAL_DISABILITY->getLabel());
-        $this->assertSame('精神残疾', HealthFullStatus::PSYCHIATRIC_DISABILITY->getLabel());
-        $this->assertSame('多重残疾', HealthFullStatus::MULTIPLE_DISABILITIES->getLabel());
-        $this->assertSame('其他残疾', HealthFullStatus::OTHER_DISABILITY->getLabel());
-    }
-
     /**
      * 测试选项列表
      */
@@ -116,4 +62,24 @@ class HealthFullStatusTest extends TestCase
         $this->assertContains(HealthFullStatus::DISABLED, $cases);
         $this->assertContains(HealthFullStatus::OTHER_DISABILITY, $cases);
     }
+
+    /**
+     * 测试toArray方法
+     */
+    public function testToArray(): void
+    {
+        $arrayData = HealthFullStatus::HEALTHY->toArray();
+        $this->assertArrayHasKey('value', $arrayData);
+        $this->assertArrayHasKey('label', $arrayData);
+        $this->assertSame(10, $arrayData['value']);
+        $this->assertSame('健康或良好', $arrayData['label']);
+
+        $arrayData = HealthFullStatus::DIABETES->toArray();
+        $this->assertSame(37, $arrayData['value']);
+        $this->assertSame('糖尿病', $arrayData['label']);
+    }
+
+    /**
+     * 测试toSelectItem方法
+     */
 }

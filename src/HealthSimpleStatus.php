@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\GBT2261;
 
 use Tourze\EnumExtra\Itemable;
@@ -20,18 +22,18 @@ enum HealthSimpleStatus: int implements Labelable, Itemable, Selectable
     use ItemTrait;
     use SelectTrait;
 
-    case Health = 1;
-    case Weak = 2;
-    case Silk = 3;
-    case Disabled = 6;
+    case HEALTH = 1;
+    case WEAK = 2;
+    case SICK = 3;
+    case DISABLED = 6;
 
     public function getLabel(): string
     {
         return match ($this) {
-            self::Health => '健康或良好',
-            self::Weak => '一般或较弱',
-            self::Silk => '有慢性病',
-            self::Disabled => '残疾',
+            self::HEALTH => '健康或良好',
+            self::WEAK => '一般或较弱',
+            self::SICK => '有慢性病',
+            self::DISABLED => '残疾',
         };
     }
 }

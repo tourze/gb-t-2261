@@ -2,36 +2,18 @@
 
 namespace Tourze\GBT2261\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Tourze\GBT2261\Gender;
+use Tourze\PHPUnitEnum\AbstractEnumTestCase;
 
 /**
  * 人的性别代码测试
+ *
+ * @internal
  */
-class GenderTest extends TestCase
+#[CoversClass(Gender::class)]
+final class GenderTest extends AbstractEnumTestCase
 {
-    /**
-     * 测试枚举值
-     */
-    public function testEnum(): void
-    {
-        $this->assertSame(0, Gender::UNKNOWN->value);
-        $this->assertSame(1, Gender::MAN->value);
-        $this->assertSame(2, Gender::WOMAN->value);
-        $this->assertSame(9, Gender::UNSPECIFIED->value);
-    }
-
-    /**
-     * 测试标签
-     */
-    public function testLabel(): void
-    {
-        $this->assertSame('未知性别', Gender::UNKNOWN->getLabel());
-        $this->assertSame('男', Gender::MAN->getLabel());
-        $this->assertSame('女', Gender::WOMAN->getLabel());
-        $this->assertSame('未说明', Gender::UNSPECIFIED->getLabel());
-    }
-
     /**
      * 测试选项列表
      */
@@ -75,4 +57,24 @@ class GenderTest extends TestCase
         $this->assertContains(Gender::WOMAN, $cases);
         $this->assertContains(Gender::UNSPECIFIED, $cases);
     }
+
+    /**
+     * 测试toArray方法
+     */
+    public function testToArray(): void
+    {
+        $arrayData = Gender::MAN->toArray();
+        $this->assertArrayHasKey('value', $arrayData);
+        $this->assertArrayHasKey('label', $arrayData);
+        $this->assertSame(1, $arrayData['value']);
+        $this->assertSame('男', $arrayData['label']);
+
+        $arrayData = Gender::WOMAN->toArray();
+        $this->assertSame(2, $arrayData['value']);
+        $this->assertSame('女', $arrayData['label']);
+    }
+
+    /**
+     * 测试toSelectItem方法
+     */
 }

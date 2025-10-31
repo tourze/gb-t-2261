@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\GBT2261;
 
 use Tourze\EnumExtra\Itemable;
@@ -15,7 +17,7 @@ use Tourze\EnumExtra\SelectTrait;
  *
  * @see https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=5D8EAFFA6F8B4AB6582FA764EF85041F
  */
-enum HealthFullStatus : int implements Labelable, Itemable, Selectable
+enum HealthFullStatus: int implements Labelable, Itemable, Selectable
 {
     use ItemTrait;
     use SelectTrait;
@@ -43,31 +45,31 @@ enum HealthFullStatus : int implements Labelable, Itemable, Selectable
     case MULTIPLE_DISABILITIES = 67;
     case OTHER_DISABILITY = 69;
 
-    public function getLabel(): string {
-        return match ($this->value) {
-            10 => '健康或良好',
-            20 => '一般或较弱',
-            30 => '有慢性病',
-            31 => '心血管病',
-            32 => '脑血管病',
-            33 => '慢性呼吸系统病',
-            34 => '慢性消化系统病',
-            35 => '慢性肾炎',
-            36 => '结核病',
-            37 => '糖尿病',
-            38 => '神经或精神疾病',
-            41 => '癌症',
-            49 => '其他慢性病',
-            60 => '残疾',
-            61 => '视力残疾',
-            62 => '听力残疾',
-            63 => '言语残疾',
-            64 => '肢体残疾',
-            65 => '智力残疾',
-            66 => '精神残疾',
-            67 => '多重残疾',
-            69 => '其他残疾',
-            default => '未知',
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::HEALTHY => '健康或良好',
+            self::GENERAL => '一般或较弱',
+            self::CHRONIC_DISEASE => '有慢性病',
+            self::CARDIOVASCULAR_DISEASE => '心血管病',
+            self::CEREBROVASCULAR_DISEASE => '脑血管病',
+            self::CHRONIC_RESPIRATORY_DISEASE => '慢性呼吸系统病',
+            self::CHRONIC_DIGESTIVE_DISEASE => '慢性消化系统病',
+            self::CHRONIC_NEPHRITIS => '慢性肾炎',
+            self::TUBERCULOSIS => '结核病',
+            self::DIABETES => '糖尿病',
+            self::NEUROLOGICAL_OR_PSYCHIATRIC_DISEASE => '神经或精神疾病',
+            self::CANCER => '癌症',
+            self::OTHER_CHRONIC_DISEASE => '其他慢性病',
+            self::DISABLED => '残疾',
+            self::VISION_DISABILITY => '视力残疾',
+            self::HEARING_DISABILITY => '听力残疾',
+            self::SPEECH_DISABILITY => '言语残疾',
+            self::PHYSICAL_DISABILITY => '肢体残疾',
+            self::INTELLECTUAL_DISABILITY => '智力残疾',
+            self::PSYCHIATRIC_DISABILITY => '精神残疾',
+            self::MULTIPLE_DISABILITIES => '多重残疾',
+            self::OTHER_DISABILITY => '其他残疾',
         };
     }
 }

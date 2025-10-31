@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\GBT2261;
 
+use Tourze\EnumExtra\BadgeInterface;
 use Tourze\EnumExtra\Itemable;
 use Tourze\EnumExtra\ItemTrait;
 use Tourze\EnumExtra\Labelable;
@@ -13,7 +16,7 @@ use Tourze\EnumExtra\SelectTrait;
  *
  * @see https://std.samr.gov.cn/gb/search/gbDetailed?id=71F772D79FF7D3A7E05397BE0A0AB82A
  */
-enum Gender: int implements Labelable, Itemable, Selectable
+enum Gender: int implements Labelable, Itemable, Selectable, BadgeInterface
 {
     use ItemTrait;
     use SelectTrait;
@@ -30,6 +33,15 @@ enum Gender: int implements Labelable, Itemable, Selectable
             self::MAN => '男',
             self::WOMAN => '女',
             self::UNSPECIFIED => '未说明',
+        };
+    }
+
+    public function getBadge(): string
+    {
+        return match ($this) {
+            self::MAN => self::PRIMARY,
+            self::WOMAN => self::DANGER,
+            default => self::SECONDARY,
         };
     }
 }
