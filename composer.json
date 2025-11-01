@@ -3,7 +3,7 @@
   "description": "个人基本信息分类与代码 GB/T 2261 标准实现",
   "license": "MIT",
   "require": {
-    "tourze/enum-extra": "1.*"
+    "tourze/enum-extra": "1.0.*"
   },
   "require-dev": {
     "phpstan/phpstan": "^2.1",
